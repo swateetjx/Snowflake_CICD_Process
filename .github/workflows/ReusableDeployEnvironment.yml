@@ -81,14 +81,14 @@ jobs:
         echo "SNOWSQL_PWD: $SNOWSQL_PWD"
         
 
-    # - name: Deploy SQL to Snowflake
-    #   run: |     
-    #     ~/bin/snowsql -f combined.sql
-        
-
     - name: Deploy SQL to Snowflake
       run: |     
-        ~/bin/snowsql -a ${{ secrets.SF_ACCOUNT }}  -u ${{ secrets.SF_USERNAME }} -p ${{ secrets.SF_PASSWORD }} -f combined.sql
+        ~/bin/snowsql -f combined.sql
+        
+
+    # - name: Deploy SQL to Snowflake
+    #   run: |     
+    #     ~/bin/snowsql -a ${{ secrets.SF_ACCOUNT }}  -u ${{ secrets.SF_USERNAME }} -p ${{ secrets.SF_PASSWORD }} -f combined.sql
 
     # - name: Deploy SQL to Snowflake
     #   run: |     
