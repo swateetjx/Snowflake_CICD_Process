@@ -37,10 +37,8 @@ jobs:
     - name: Check if SQL Files exist
       run: |
         for dir in $SQL_DIRS; do
-        echo "SQL Files in $SQL_DIRS"
-        find $dir -name '*.sql' 
-        -exec 
-        echo {} \;
+          echo "SQL Files in $SQL_DIRS"
+          find $dir -name '*.sql' -exec echo {} \;
         done
     
     - name: cwd
@@ -52,8 +50,7 @@ jobs:
       run: |
         > combined.sql
         for dir in $SQL_DIRS; do
-        find $dir -name '*.sql' 
-        -exec cat {} + >> combined.sql
+          find $dir -name '*.sql' -exec cat {} + >> combined.sql
         done
         echo "Contents of combined.sql"
         cat combined.sql
