@@ -32,7 +32,11 @@ jobs:
       run: |
         echo "Listinng SQL Files in $SQL_FOLDER"
         ls $SQL_FOLDER
-        
+
+    - name: Debug Env Variables
+      run: |
+        echo "SF_ACCOUNT=${{ secrets.SF_ACCOUNT }}"
+      
     - name: cwd
       run: |
         pwd
