@@ -9,6 +9,7 @@ on:
         required: true
         description: "environment deployment"
 
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
@@ -44,8 +45,24 @@ jobs:
     - name: Replace placeholders in SQL template
       run: |
         # Replace placeholders with environment-specific values
-        sed -i "s/%DBNAME%/${{ secrets.DBNAME }}/g" combined.sql      
-    
+        sed -i "s/%DBNAME%/${{ secrets.DBNAME }}/g" combined.sql
+        
+    # - name: Replace placeholders in SQL template
+    #   run: |
+    #     # Replace placeholders with environment-specific values
+    #     # sed -i "s/%DBNAME%/${{ secrets.DBNAME }}/g" $SQL_FOLDER/*.sql
+    #     for file in $SQL_FOLDER/*.sql;
+    #      do
+    #       echo "Processing $file"
+    #       sed -i "s/%DBNAME%/${{ secrets.DBNAME }}/g" "$file"
+    #      done        
+
+    # - name: Upload artifact file
+    #   uses: actions/upload-artifact@v2
+    #   with:
+    #     name: modified_file
+    #     path: $SQL_FOLDER
+
     - name: Install SnowSQL
       run: |
           curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql-1.2.9-linux_x86_64.bash
@@ -55,6 +72,10 @@ jobs:
       run: |
           ~/bin/snowsql --bootstrap-version
           
+    # - name: Upload artifact to SnowSQL
+    #   run: |
+    #       ~/bin/snowsql -q 'put file://'$(pwd)' combined.sql @~/Demo overwrite=true' 
+          
     - name: Print Environment Variables
       run: |
         echo "SNOWSQL_ACCOUNT: $SNOWSQL_ACCOUNT"
@@ -62,6 +83,33 @@ jobs:
         echo "SNOWSQL_DATABASE: $SNOWSQL_DATABASE"
         echo "SNOWSQL_PWD: $SNOWSQL_PWD"
         
+    # - name: Deploy SQL to Snowflake
+    #   run: |     
+    #     ~/bin/snowsql -q 'ALTER TABLE DEMO_DB.DEMO_SCHEMA.FIRST_TABLE_CICD ADD COLUMN GENDER VARCHAR;' -o friendly=false
+
     - name: Deploy SQL to Snowflake
       run: |     
         ~/bin/snowsql -f combined.sql
+        
+
+    # - name: Deploy SQL to Snowflake
+    #   run: |     
+    #     ~/bin/snowsql -a ${{ secrets.SF_ACCOUNT }}  -u ${{ secrets.SF_USERNAME }} -p ${{ secrets.SF_PASSWORD }} -f dbscripts/AlterScript.sql
+
+    # - name: Deploy SQL to Snowflake
+    #   run: |     
+    #     ~/bin/snowsql -a "$SNOWSQL_ACCOUNT" -u "$SNOWSQL_USER" -p "$SNOWSQL_PWD" -f dbscripts/AlterScript.sql
+
+    # - name: Deploy SQL to Snowflake
+    #   run: |     
+    #     ~/bin/snowsql -a "vi02661.central-india.azure" -u "swateesingh19" -p "Samaira25$" -f dbscripts/AlterScript.sql
+        
+    # - name: Deploy SQL to Snowflake
+    #   run: |
+    #       ~/bin/snowsql -q 'CREATE OR REPLACE PROCEDURE  MYPROC(message STRING)
+    #                                     RETURNS STRING
+    #                                     LANGUAGE PYTHON
+    #                                     RUNTIME_VERSION = '\''3.8'\''
+    #                                     PACKAGES = ('')
+    #                                     IMPORTS = ('\''@~/${{ github.ref_name }}/storedproc.py'\'')
+    #                                     HANDLER = '\''storedproc.run'\'';' -o friendly=false
