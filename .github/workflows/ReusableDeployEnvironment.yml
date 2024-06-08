@@ -30,7 +30,7 @@ jobs:
     - name: Debug Environment Variables
       run: |
         echo "SQL_FOLDER=$SQL_FOLDER"
-        echo "SNOWSQL_ACCOUNT = $SF_ACCOUNT"
+        echo "SNOWSQL_ACCOUNT = $SNOWSQL_ACCOUNT"
      
     - name: List SQL Files
       run: |
