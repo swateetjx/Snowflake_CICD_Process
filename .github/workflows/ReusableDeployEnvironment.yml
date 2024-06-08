@@ -22,17 +22,26 @@ jobs:
       SNOWSQL_SCHEMA: ${{ secrets.SF_SCHEMA }}
       SNOWSQL_ROLE: ${{ secrets.SF_ROLE }}
       SNOWSQL_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-      SQL_FOLDER: 'dbscripts'
+      SQL_DIRS: 'dbscripts views'
+      # SQL_FOLDER: 'dbscripts'
       
     steps:
     - name: Checkout code
       uses: actions/checkout@v2
      
-    - name: List SQL Files
+    # - name: List SQL Files
+    #   run: |
+    #     echo "Listinng SQL Files in $SQL_FOLDER"
+    #     ls $SQL_FOLDER
+
+    - name: Check if SQL Files exist
       run: |
-        echo "Listinng SQL Files in $SQL_FOLDER"
-        ls $SQL_FOLDER
-      
+        for dir in $SQL_DIRS; do
+        echo "SQL Files in $SQL_DIRS"
+        find $dir -name '*.sql' -exec 
+        echo {} \;
+        done
+    
     - name: cwd
       run: |
         pwd
@@ -40,7 +49,17 @@ jobs:
 
     - name: Concatenate SQL Files
       run: |
-        cat $SQL_FOLDER/*.sql > combined.sql
+        > combined.sql
+        for dir in $SQL_DIRS; do
+        find $dir -name '*.sql' 
+        -exec cat {} + >> combined.sql
+        done
+        echo "Contents of combined.sql"
+        cat combined.sql
+        
+    # - name: Concatenate SQL Files
+    #   run: |
+    #     cat $SQL_FOLDER/*.sql > combined.sql
 
     - name: Replace placeholders in SQL template
       run: |
