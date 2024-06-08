@@ -5,13 +5,13 @@ on:
 
 jobs:
   Deploy_Dev:
-    uses: swateesingh19/Snowflake_CICD_Process/.github/workflows/ReusableDeployEnvironment.yml@main
+    uses: swateetjx/Snowflake_CICD_Process/.github/workflows/ReusableDeployEnvironment.yml@main
     with:
       environment: DEV
     secrets: inherit
 
   Deploy_QA:
-    uses: swateesingh19/Snowflake_CICD_Process/.github/workflows/ReusableDeployEnvironment.yml@main
+    uses: swateetjx/Snowflake_CICD_Process/.github/workflows/ReusableDeployEnvironment.yml@main
     needs: Deploy_Dev
     with:
       environment: QA
