@@ -32,10 +32,6 @@ jobs:
       run: |
         echo "Listinng SQL Files in $SQL_FOLDER"
         ls $SQL_FOLDER
-
-    - name: Debug Env Variables
-      run: |
-        echo "SF_ACCOUNT=${{ secrets.SF_ACCOUNT }}"
       
     - name: cwd
       run: |
@@ -76,9 +72,6 @@ jobs:
       run: |
           ~/bin/snowsql --bootstrap-version
           
-    # - name: Upload artifact to SnowSQL
-    #   run: |
-    #       ~/bin/snowsql -q 'put file://'$(pwd)' combined.sql @~/Demo overwrite=true' 
           
     - name: Print Environment Variables
       run: |
@@ -87,18 +80,15 @@ jobs:
         echo "SNOWSQL_DATABASE: $SNOWSQL_DATABASE"
         echo "SNOWSQL_PWD: $SNOWSQL_PWD"
         
+
     # - name: Deploy SQL to Snowflake
     #   run: |     
-    #     ~/bin/snowsql -q 'ALTER TABLE DEMO_DB.DEMO_SCHEMA.FIRST_TABLE_CICD ADD COLUMN GENDER VARCHAR;' -o friendly=false
+    #     ~/bin/snowsql -f combined.sql
+        
 
     - name: Deploy SQL to Snowflake
       run: |     
-        ~/bin/snowsql -f combined.sql
-        
-
-    # - name: Deploy SQL to Snowflake
-    #   run: |     
-    #     ~/bin/snowsql -a ${{ secrets.SF_ACCOUNT }}  -u ${{ secrets.SF_USERNAME }} -p ${{ secrets.SF_PASSWORD }} -f dbscripts/AlterScript.sql
+        ~/bin/snowsql -a ${{ secrets.SF_ACCOUNT }}  -u ${{ secrets.SF_USERNAME }} -p ${{ secrets.SF_PASSWORD }} -f combined.sql
 
     # - name: Deploy SQL to Snowflake
     #   run: |     
