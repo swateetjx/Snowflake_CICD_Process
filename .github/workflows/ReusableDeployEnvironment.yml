@@ -39,7 +39,8 @@ jobs:
         for dir in $SQL_DIRS; do
         echo "SQL Files in $SQL_DIRS"
         find $dir -name '*.sql' 
-        -exec echo {} \;
+        -exec 
+        echo {} \;
         done
     
     - name: cwd
