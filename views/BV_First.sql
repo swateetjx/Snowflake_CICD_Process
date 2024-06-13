@@ -1,7 +1,9 @@
 CREATE or REPLACE VIEW  %DBNAME%.PID.BV_FIRST (
- FirstName 
+ FirstName ,
+ LastName
 ) AS 
   SELECT 
-  FNAME
+  FNAME,
+ LNAME
 FROM  %DBNAME%.PID.FIRST_TABLE_CICD;
 
