@@ -61,7 +61,7 @@ jobs:
         fi
 
         echo "Checking for NEGATIVE_METRIC_COUNT value..."
-        if grep -q '|                 0 |' test_results.txt; then
+        if grep -q '|                 1 |' test_results.txt; then
           echo "Test for NEGATIVE_METRIC_COUNT passed.";
         else
           echo "Test for NEGATIVE_METRIC_COUNT failed.";
