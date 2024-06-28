@@ -46,12 +46,18 @@ jobs:
       
     - name: Check test results
       run: |
+        echo "Contents of test_results.txt:"
+        cat test_results.txt
+        
+        ALL_TESTS_PASSED=true
+        
         echo "Checking for COLUMN_NULL_COUNT value..."
         if grep -q '|                 1 |' test_results.txt; then
           echo "Test for COLUMN_NULL_COUNT passed.";
         else
           echo "Test for COLUMN_NULL_COUNT failed.";
-          exit 1;
+          ALL_TESTS_PASSED=false
+          # exit 1;
         fi
 
         echo "Checking for NEGATIVE_METRIC_COUNT value..."
@@ -59,7 +65,13 @@ jobs:
           echo "Test for NEGATIVE_METRIC_COUNT passed.";
         else
           echo "Test for NEGATIVE_METRIC_COUNT failed.";
-          exit 1;
+          ALL_TESTS_PASSED=false
+          # exit 1;
+        fi
+
+        if [ "$ALL_TESTS_PASSED" = false ]; then
+          echo "One or more tests failed."
+          exit 1
         fi
         
         # if grep -q 'negative_metric_count,0' test_results.txt; then
