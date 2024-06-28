@@ -72,6 +72,8 @@ jobs:
         if [ "$ALL_TESTS_PASSED" = false ]; then
           echo "One or more tests failed."
           exit 1
+        else
+          echo "All tests passed successfully!"          
         fi
         
         # if grep -q 'negative_metric_count,0' test_results.txt; then
