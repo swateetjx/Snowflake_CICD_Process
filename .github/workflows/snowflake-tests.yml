@@ -28,12 +28,13 @@ jobs:
           
     - name: Run Snowflake data tests
       env:
-        SNOWFLAKE_USER: ${{ secrets.SNOWFLAKE_USER }}
-        SNOWFLAKE_PASSWORD: ${{ secrets.SNOWFLAKE_PASSWORD }}
-        SNOWFLAKE_ACCOUNT: ${{ secrets.SNOWFLAKE_ACCOUNT }}
-        SNOWFLAKE_WAREHOUSE: ${{ secrets.SNOWFLAKE_WAREHOUSE }}
-        SNOWFLAKE_DATABASE: ${{ secrets.SNOWFLAKE_DATABASE }}
-        SNOWFLAKE_SCHEMA: ${{ secrets.SNOWFLAKE_SCHEMA }}
+        SNOWSQL_PWD: ${{ secrets.SF_PASSWORD }}
+        SNOWSQL_ACCOUNT: ${{ secrets.SF_ACCOUNT }}
+        SNOWSQL_USER: ${{ secrets.SF_USERNAME }}
+        SNOWSQL_DATABASE: ${{ secrets.SF_DATABASE }}
+        SNOWSQL_SCHEMA: ${{ secrets.SF_SCHEMA }}
+        SNOWSQL_ROLE: ${{ secrets.SF_ROLE }}
+        SNOWSQL_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
       run: |
         ~/bin/snowsql -q "SELECT 'Running tests...';"
         ~/bin/snowsql -f data_tests.sql --output-format=csv > test_results.csv
