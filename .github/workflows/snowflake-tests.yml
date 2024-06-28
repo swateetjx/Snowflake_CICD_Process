@@ -59,8 +59,6 @@ jobs:
           echo "Test for NEGATIVE_METRIC_COUNT passed.";
         else
           echo "Test for NEGATIVE_METRIC_COUNT failed.";
-          echo "Details:";
-          grep '| NEGATIVE_METRIC_COUNT |' test_results.txt || echo "No match found for '| NEGATIVE_METRIC_COUNT |'"
           exit 1;
         fi
         
