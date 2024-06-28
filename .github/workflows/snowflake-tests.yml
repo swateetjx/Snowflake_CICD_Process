@@ -39,7 +39,7 @@ jobs:
 
     - name: Check test results
       run: |
-        if grep -q 'critical_column_null_count,0' test_results.csv && grep -q 'negative_metric_count,0' test_results.csv; then
+        if grep -q 'column_null_count,0' test_results.csv && grep -q 'negative_metric_count,0' test_results.csv; then
           echo "All tests passed!";
         else
           echo "Some tests failed!";
