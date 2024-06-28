@@ -21,9 +21,10 @@ jobs:
       run: |
         sudo apt-get update
         sudo apt-get install -y jq
-        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/1.2/linux_x86_64/snowsql
-        chmod +x snowsql
-        sudo mv snowsql /usr/local/bin/
+        curl -O https://sfc-repo.snowflakecomputing.com/snowsql/bootstrap/latest/linux_x86_64/snowsql-linux_x86_64
+        chmod +x snowsql-linux_x86_64
+        sudo mv snowsql-linux_x86_64 /usr/local/bin/snowsql
+        snowsql -v
 
     - name: Run Snowflake data tests
       env:
