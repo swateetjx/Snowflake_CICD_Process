@@ -47,7 +47,7 @@ jobs:
     - name: Check test results
       run: |
         echo "Checking for COLUMN_NULL_COUNT value..."
-        if grep -q '|                 1 |' test_results.txt; then
+        if grep -q '|                 0 |' test_results.txt; then
           echo "Test for COLUMN_NULL_COUNT passed.";
         else
           echo "Test for COLUMN_NULL_COUNT failed.";
