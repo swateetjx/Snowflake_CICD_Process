@@ -46,6 +46,17 @@ jobs:
       
     - name: Check test results
       run: |
+        echo "Contents of test_results.txt:"
+        cat test_results.txt
+
+        echo "Checking for column_null_count..."
+        if grep -q 'column_null_count' test_results.txt; then
+          echo "Pattern 'column_null_count' found.";
+        else
+          echo "Pattern 'column_null_count' not found.";
+        fi
+
+        echo "Checking for column_null_count,1..."
         if grep -q 'column_null_count,1' test_results.txt; then
           echo "Test for column_null_count passed.";
         else
