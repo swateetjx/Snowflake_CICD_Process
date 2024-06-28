@@ -1,4 +1,7 @@
 INSERT INTO 
 %DBNAME%.PID.SECOND_TABLE_CICD (FIRSTNAME,LASTNAME,GENDER,AGE)
 VALUES 
-('Alia',,'F',25);
+  ('Will','Smith','M',NULL),
+('Robin','Sharma','M',-1),
+('John','K','M',28);
+
