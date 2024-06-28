@@ -40,12 +40,21 @@ jobs:
         ~/bin/snowsql -f data_tests.sql > test_results.txt
         # snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD -w $SNOWFLAKE_WAREHOUSE -d $SNOWFLAKE_DATABASE -s $SNOWFLAKE_SCHEMA -q "SELECT 'Running tests...';"
         # snowsql -a $SNOWFLAKE_ACCOUNT -u $SNOWFLAKE_USER -p $SNOWFLAKE_PASSWORD -w $SNOWFLAKE_WAREHOUSE -d $SNOWFLAKE_DATABASE -s $SNOWFLAKE_SCHEMA -f path/to/data_tests.sql --output-format=csv > test_results.csv
-
+        
+    - name: Print test results
+      run: cat test_results.txt
+      
     - name: Check test results
       run: |
-        if grep -q 'column_null_count,0' test_results.txt && grep -q 'negative_metric_count,0' test_results.txt; then
-          echo "All tests passed!";
+        if grep -q 'column_null_count,0' test_results.txt; then
+          echo "Test for column_null_count passed.";
         else
-          echo "Some tests failed!";
+          echo "Test for column_null_count failed.";
+          exit 1;
+        fi
+        if grep -q 'negative_metric_count,0' test_results.txt; then
+          echo "Test for negative_metric_count passed.";
+        else
+          echo "Test for negative_metric_count failed.";
           exit 1;
         fi
