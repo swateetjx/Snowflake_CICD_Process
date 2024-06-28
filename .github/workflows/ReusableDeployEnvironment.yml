@@ -22,7 +22,7 @@ jobs:
       SNOWSQL_SCHEMA: ${{ secrets.SF_SCHEMA }}
       SNOWSQL_ROLE: ${{ secrets.SF_ROLE }}
       SNOWSQL_WAREHOUSE: ${{ secrets.SF_WAREHOUSE }}
-      SQL_DIRS: 'dbscripts views'
+      SQL_DIRS: 'dbscripts views inserts'
       # SQL_FOLDER: 'dbscripts'
       
     steps:
