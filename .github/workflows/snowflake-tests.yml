@@ -51,8 +51,6 @@ jobs:
           echo "Test for COLUMN_NULL_COUNT passed.";
         else
           echo "Test for COLUMN_NULL_COUNT failed.";
-          echo "Details:";
-          grep '| COLUMN_NULL_COUNT |' test_results.txt || echo "No match found for '| COLUMN_NULL_COUNT |'"
           exit 1;
         fi
         # if grep -q 'negative_metric_count,0' test_results.txt; then
