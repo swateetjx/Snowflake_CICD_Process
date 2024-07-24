@@ -1,0 +1,1 @@
+[![Snowflake Data Tests](https://github.com/swateetjx/Snowflake_CICD_Process/actions/workflows/snowflake-tests.yml/badge.svg)](https://github.com/swateetjx/Snowflake_CICD_Process/actions/workflows/snowflake-tests.yml)
